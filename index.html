@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datastar.js & Tailwind CSS Form with Markdown Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #333;
+            /* Default text color for the body */
+        }
+
+        /* Custom styles for Markdown content */
+        .markdown-custom-styles {
+            line-height: 1.7;
+            color: #333;
+        }
+
+        .markdown-custom-styles h1,
+        .markdown-custom-styles h2,
+        .markdown-custom-styles h3,
+        .markdown-custom-styles h4,
+        .markdown-custom-styles h5,
+        .markdown-custom-styles h6 {
+            margin-top: 1.5em;
+            margin-bottom: 0.8em;
+            font-weight: 600;
+            line-height: 1.3;
+            color: #1a202c;
+            /* Darker heading color */
+        }
+
+        .markdown-custom-styles h1 {
+            font-size: 2.25em;
+            border-bottom: 1px solid #e2e8f0;
+            /* Light border for h1 */
+            padding-bottom: 0.3em;
+        }
+
+        .markdown-custom-styles h2 {
+            font-size: 1.75em;
+            border-bottom: 1px solid #e2e8f0;
+            /* Light border for h2 */
+            padding-bottom: 0.3em;
+        }
+
+        .markdown-custom-styles h3 {
+            font-size: 1.375em;
+        }
+
+        .markdown-custom-styles h4 {
+            font-size: 1.125em;
+        }
+
+        .markdown-custom-styles p {
+            margin-bottom: 1.25em;
+        }
+
+        .markdown-custom-styles a {
+            color: #2b6cb0;
+            /* Blue link color */
+            text-decoration: none;
+        }
+
+        .markdown-custom-styles a:hover {
+            text-decoration: underline;
+            color: #2c5282;
+            /* Darker blue on hover */
+        }
+
+        .markdown-custom-styles ul,
+        .markdown-custom-styles ol {
+            margin-bottom: 1.25em;
+            padding-left: 1.8em;
+        }
+
+        .markdown-custom-styles li {
+            margin-bottom: 0.4em;
+        }
+
+        .markdown-custom-styles ul li::marker {
+            color: #2b6cb0;
+            /* Blue list marker */
+        }
+
+        .markdown-custom-styles ol li::marker {
+            color: #2b6cb0;
+            /* Blue list marker */
+        }
+
+
+        .markdown-custom-styles blockquote {
+            margin-left: 0;
+            margin-right: 0;
+            margin-bottom: 1.25em;
+            padding: 0.8em 1.5em;
+            border-left: 4px solid #a0aec0;
+            /* Gray border for blockquote */
+            background-color: #f7fafc;
+            /* Light background for blockquote */
+            color: #4a5568;
+            /* Slightly muted text color for blockquote */
+        }
+
+        .markdown-custom-styles blockquote p:last-child {
+            margin-bottom: 0;
+        }
+
+        .markdown-custom-styles code {
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+            background-color: #edf2f7;
+            /* Light gray background for inline code */
+            color: #c53030;
+            /* Reddish color for inline code text */
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+
+        .markdown-custom-styles pre {
+            background-color: #1a202c;
+            /* Dark background for code blocks */
+            color: #e2e8f0;
+            /* Light text color for code blocks */
+            padding: 1em;
+            margin-bottom: 1.25em;
+            border-radius: 6px;
+            overflow-x: auto;
+            /* Allow horizontal scrolling for long lines */
+            font-size: 0.9em;
+        }
+
+        .markdown-custom-styles pre code {
+            background-color: transparent;
+            color: inherit;
+            padding: 0;
+            font-size: inherit;
+            /* Ensure code inside pre uses pre's font size */
+        }
+
+        .markdown-custom-styles table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.25em;
+            font-size: 0.9em;
+        }
+
+        .markdown-custom-styles th,
+        .markdown-custom-styles td {
+            border: 1px solid #cbd5e0;
+            /* Gray border for table cells */
+            padding: 0.6em 0.8em;
+            text-align: left;
+        }
+
+        .markdown-custom-styles th {
+            background-color: #f7fafc;
+            /* Light background for table headers */
+            font-weight: 600;
+        }
+
+        .markdown-custom-styles tr:nth-child(even) {
+            background-color: #f7fafc80;
+            /* Slightly different background for even rows */
+        }
+
+        .markdown-custom-styles hr {
+            border: 0;
+            height: 1px;
+            background-color: #e2e8f0;
+            /* Light gray for horizontal rule */
+            margin-top: 2em;
+            margin-bottom: 2em;
+        }
+
+        .markdown-custom-styles img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            /* Slightly rounded images */
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- 
+        Import Map for Datastar bundle.
+        Showdown will be loaded globally via its own script tag later.
+    -->
+    <script type="importmap">
+    {
+        "imports": {
+            "datastar": "https://cdn.jsdelivr.net/gh/starfederation/datastar@v1.0.0-beta.11/bundles/datastar.js"
+        }
+    }
+    </script>
+
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
+
+    <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-lg" data-signals="{ 
+            email: '', 
+            description: '',
+            submissionMessage: '',
+            markdown: '# Hello Markdown!\n\nThis is **Datastar** rendering markdown with `showdown.js`.\n\n* List item 1\n* List item 2\n\n## Subheading\n\nSome `inline code` here.\n\n```javascript\nfunction greet(name) {\n  console.log(\`Hello, \${name}!\`);\n}\ngreet(\'World\');\n```\n\n> This is a blockquote.\n\nAnd a table:\n\n| Header 1 | Header 2 | Header 3 |\n| -------- | -------- | -------- |\n| Cell 1   | Cell 2   | Cell 3   |\n| Cell 4   | Cell 5   | Cell 6   |\n\nAn image (placeholder):\n![Placeholder Image](https://placehold.co/600x200/eee/333?text=Markdown+Image)\n\n---\n\nEnd of example.' 
+        }">
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">Datastar Demo Form</h1>
+
+
+        <div class="mb-6">
+            <label for="markdown-input" class="block text-sm font-medium text-gray-700 mb-1">Markdown Editor:</label>
+            <textarea id="markdown-input" data-bind-markdown rows="8"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 font-mono text-sm"
+                placeholder="Type your Markdown here..."></textarea>
+        </div>
+
+        <div class="mb-6">
+            <h3 class="text-lg font-semibold text-gray-700 mb-2">Markdown Preview:</h3>
+            <div data-markdown="$markdown"
+                class="markdown-custom-styles p-4 border border-gray-300 rounded-lg min-h-[100px] bg-gray-50 max-w-none">
+            </div>
+        </div>
+
+        <form @submit.prevent>
+            <div class="mb-6">
+                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Name:</label>
+                <input type="text" id="name" data-bind-name placeholder="e.g., Jane Doe"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-150">
+            </div>
+
+            <div class="mb-6">
+                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email:</label>
+                <input type="email" id="email" data-bind-email placeholder="e.g., jane.doe@example.com"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-150">
+            </div>
+
+            <div class="mb-6">
+                <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Description:</label>
+                <textarea id="description" data-bind-description rows="4"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 font-mono text-sm"
+                    placeholder="Type your description here..."></textarea>
+            </div>
+
+
+            <button type="button"
+                data-on-click="$submissionMessage = `Form Submitted!\nName: ${$name || 'N/A'}\nEmail: ${$email || 'N/A'}\nDescription: ${$description || 'N/A'}`"
+                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-150 mb-8">
+                Submit Basic Info
+            </button>
+        </form>
+
+        <div>
+            <h3 class="text-lg font-semibold text-gray-700 mb-2">Input Preview:</h3>
+            <div class="p-4 mb-2 border border-gray-200 rounded-lg bg-gray-50 text-sm">
+                <strong>Name:</strong> <span data-text="$name || '...'" class="font-mono text-blue-600"></span>
+            </div>
+            <div class="p-4 mb-2 border border-gray-200 rounded-lg bg-gray-50 text-sm">
+                <strong>Email:</strong> <span data-text="$email || '...'" class="font-mono text-blue-600"></span>
+            </div>
+            <div class="p-4 mb-4 border border-gray-200 rounded-lg bg-gray-50 text-sm min-h-[60px] whitespace-pre-line">
+                <strong>Description:</strong> <span data-text="$description || '...'"
+                    class="font-mono text-blue-600"></span>
+            </div>
+        </div>
+
+        <div data-if="$submissionMessage" class="mb-8 p-6 bg-gray-50 rounded-lg border border-gray-200">
+            <h2 class="text-xl font-semibold text-gray-700 mb-4">Submission Details:</h2>
+            <div class="p-4 bg-green-100 border border-green-300 text-green-700 rounded-lg text-sm whitespace-pre-wrap"
+                data-text="$submissionMessage">
+            </div>
+            <button type="button" data-on-click="$submissionMessage = ''"
+                class="mt-2 text-xs text-blue-500 hover:text-blue-700">
+                Clear Message
+            </button>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
+    <script type="module">
+        // Import 'load' from the Datastar bundle
+        import { load } from 'datastar';
+
+        // Define the custom markdown plugin for Datastar
+        const markdownPlugin = {
+            type: 1, // PluginType.Attribute
+            name: 'markdown',
+            onLoad: (ctx) => {
+                console.log("ctx", ctx)
+                // Access Showdown via the global window object
+                if (!window.showdown || !window.showdown.Converter) {
+                    console.error("Showdown library not found on window object. Ensure it's loaded before this script.");
+                    ctx.el.innerHTML = `<p style="color:red; font-family:monospace;">Showdown library not loaded.</p>`;
+                    return;
+                }
+
+                const ShowdownConverter = window.showdown.Converter;
+                const converter = new ShowdownConverter({
+                    ghCompatibleHeaderId: true,
+                    simpleLineBreaks: true,
+                    strikethrough: true,
+                    tables: true,
+                    tasklists: true,
+                    openLinksInNewWindow: true,
+                });
+
+                // Get the reactive expression runner from the context
+                const reactiveExpressionRunner = ctx.genRX();
+
+                if (!(ctx.el instanceof HTMLElement)) {
+                    console.error("MarkdownInvalidElement: Target element is not an HTMLElement.", ctx);
+                    return;
+                }
+
+                return ctx.effect(() => {
+                    try {
+                        // Execute the reactive expression runner to get the current value of the attribute (e.g., $markdown)
+                        const markdownText = reactiveExpressionRunner(ctx);
+                        const html = converter.makeHtml(markdownText || '');
+                        ctx.el.innerHTML = html;
+                    } catch (error) {
+                        console.error(`Error rendering markdown for expression "${ctx.value}":`, error);
+                        ctx.el.innerHTML = `<p style="color:red; font-family:monospace;">Error rendering Markdown. Check console.</p>`;
+                    }
+                });
+            }
+        };
+
+        // Initialize Datastar with custom plugins.
+        load(markdownPlugin);
+
+    </script>
+
+</body>
+
+</html>
