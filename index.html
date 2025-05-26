@@ -207,21 +207,21 @@
             email: '', 
             description: '',
             submissionMessage: '',
-            markdown: '# Hello Markdown!\n\nThis is **Datastar** rendering markdown with `showdown.js`.\n\n* List item 1\n* List item 2\n\n## Subheading\n\nSome `inline code` here.\n\n```javascript\nfunction greet(name) {\n  console.log(\`Hello, \${name}!\`);\n}\ngreet(\'World\');\n```\n\n> This is a blockquote.\n\nAnd a table:\n\n| Header 1 | Header 2 | Header 3 |\n| -------- | -------- | -------- |\n| Cell 1   | Cell 2   | Cell 3   |\n| Cell 4   | Cell 5   | Cell 6   |\n\nAn image (placeholder):\n![Placeholder Image](https://placehold.co/600x200/eee/333?text=Markdown+Image)\n\n---\n\nEnd of example.' 
+            markdownText: '# Hello Markdown!\n\nThis is **Datastar** rendering markdown with `showdown.js`.\n\n* List item 1\n* List item 2\n\n## Subheading\n\nSome `inline code` here.\n\n```javascript\nfunction greet(name) {\n  console.log(\`Hello, \${name}!\`);\n}\ngreet(\'World\');\n```\n\n> This is a blockquote.\n\nAnd a table:\n\n| Header 1 | Header 2 | Header 3 |\n| -------- | -------- | -------- |\n| Cell 1   | Cell 2   | Cell 3   |\n| Cell 4   | Cell 5   | Cell 6   |\n\nAn image (placeholder):\n![Placeholder Image](https://placehold.co/600x200/eee/333?text=Markdown+Image)\n\n---\n\nEnd of example.' 
         }">
         <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">Datastar Demo Form</h1>
 
 
         <div class="mb-6">
             <label for="markdown-input" class="block text-sm font-medium text-gray-700 mb-1">Markdown Editor:</label>
-            <textarea id="markdown-input" data-bind-markdown rows="8"
+            <textarea id="markdown-input" data-bind-markdown-text rows="8"
                 class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 font-mono text-sm"
                 placeholder="Type your Markdown here..."></textarea>
         </div>
 
         <div class="mb-6">
             <h3 class="text-lg font-semibold text-gray-700 mb-2">Markdown Preview:</h3>
-            <div data-markdown="$markdown"
+            <div data-markdown="$markdownText"
                 class="markdown-custom-styles p-4 border border-gray-300 rounded-lg min-h-[100px] bg-gray-50 max-w-none">
             </div>
         </div>
